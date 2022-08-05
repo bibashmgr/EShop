@@ -7,6 +7,7 @@ const bodyParser = require('body-parser');
 // routes:
 const indexRoutes = require('./routes/index.js');
 const authRoutes = require('./routes/auth.js');
+const categoryRoutes = require('./routes/category.js');
 const productRoutes = require('./routes/product.js');
 
 const app = express();
@@ -28,6 +29,7 @@ app.use(
 
 app.use('/api', indexRoutes);
 app.use('/api/auth', authRoutes);
+app.use('/api/category', categoryRoutes);
 app.use('/api/product', productRoutes);
 
 // running server
