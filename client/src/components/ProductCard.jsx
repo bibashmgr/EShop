@@ -59,7 +59,6 @@ const ProductCard = ({ product }) => {
           />
           <IconButton
             variant='solid'
-            colorScheme='whatsapp'
             size={{ base: 'xs', sm: 'sm' }}
             title='Add'
             icon={
