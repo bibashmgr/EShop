@@ -15,12 +15,16 @@ const productSchema = mongoose.Schema(
       default: [],
     },
     priceAmount: {
-      type: String,
+      type: Number,
       require: true,
     },
     priceUnit: {
       type: String,
       require: true,
+    },
+    quantity: {
+      type: Number,
+      default: 1,
     },
     desc: {
       type: String,
