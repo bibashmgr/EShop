@@ -1,17 +1,15 @@
-import React, { useEffect } from 'react';
-import axios from 'axios';
-import { useDispatch } from 'react-redux';
+import React, { useEffect, useState } from 'react';
 
 // components
 import NavBar from '../components/NavBar';
 import SearchBar from '../components/SearchBar';
 import Products from '../components/Products';
 
-// actions
-import { setProducts } from '../features/productsSlice';
+// request methods:
+import { userRequest } from '../api/requestMethods';
 
 const Home = () => {
-  const dispatch = useDispatch();
+  const [products, setProducts] = useState([]);
 
   useEffect(() => {
     getProducts();
@@ -19,13 +17,14 @@ const Home = () => {
   }, []);
 
   const getProducts = async () => {
-    await axios
-      .get('http://localhost:9999/api/product')
+    await userRequest
+      .get('/product')
       .then((res) => res.data)
       .then((result) => {
         const { status, data, message } = result;
         if (status === 'ok') {
-          dispatch(setProducts(data));
+          setProducts(data);
+          console.log(data);
           console.log(message);
         }
         if (status === 'fail') {
@@ -41,7 +40,7 @@ const Home = () => {
     <>
       <NavBar />
       <SearchBar />
-      <Products />
+      <Products products={products} />
     </>
   );
 };

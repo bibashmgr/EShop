@@ -23,7 +23,7 @@ const CartProductCard = ({ product }) => {
           </Flex>
           <Flex justify='space-between' align='end'>
             <Text fontSize={{ base: 'xl', md: '2xl' }} fontWeight='bold'>
-              ${product.price}
+              {product.priceUnit + product.priceAmount}
             </Text>
             <HStack>
               <IconButton
@@ -33,7 +33,11 @@ const CartProductCard = ({ product }) => {
                 icon={<Icon as={AiOutlineMinus} boxSize={{ base: '15px' }} />}
                 onClick={() => console.log('-')}
               />
-              <Text fontWeight='bold'>01</Text>
+              <Text fontWeight='bold'>
+                {product.quantity < 10
+                  ? '0' + product.quantity
+                  : product.quantity}
+              </Text>
               <IconButton
                 variant='solid'
                 size={{ base: 'sm' }}

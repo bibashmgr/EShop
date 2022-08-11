@@ -4,10 +4,7 @@ import { Grid } from '@chakra-ui/react';
 // components
 import ProductCard from './ProductCard';
 
-// utils
-import { products } from '../utils/products.js';
-
-const Products = () => {
+const Products = ({ products }) => {
   return (
     <Grid
       templateColumns={{
