@@ -1,5 +1,6 @@
 import React from 'react';
 import { useNavigate } from 'react-router-dom';
+import { useDispatch, useSelector } from 'react-redux';
 import {
   Flex,
   HStack,
@@ -13,8 +14,19 @@ import {
 // icons
 import { AiFillHeart, AiOutlinePlus } from 'react-icons/ai';
 
+// actions
+import { addProducts } from '../features/cartSlice.js';
+
 const ProductCard = ({ product }) => {
   const navigate = useNavigate();
+  const dispatch = useDispatch();
+  const cartProducts = useSelector((state) => state.carts?.cartProducts);
+
+  // handlers
+  const handleAdd = (details) => {
+    dispatch(addProducts(details));
+    console.log(cartProducts);
+  };
 
   return (
     <VStack
@@ -25,6 +37,7 @@ const ProductCard = ({ product }) => {
       boxShadow='rgba(0, 0, 0, 0.1) 0px 1px 3px 0px, rgba(0, 0, 0, 0.06) 0px 1px 2px 0px;'
       borderRadius='10px'
       cursor='pointer'
+      align='start'
     >
       <Image
         src='/images/default.png'
@@ -41,7 +54,7 @@ const ProductCard = ({ product }) => {
       </VStack>
       <Flex justify='space-between' align='center' w='full'>
         <Text fontSize='lg' fontWeight='bold'>
-          ${product.price}
+          {product.priceUnit + product.priceAmount}
         </Text>
         <HStack>
           <IconButton
@@ -59,13 +72,12 @@ const ProductCard = ({ product }) => {
           />
           <IconButton
             variant='solid'
-            colorScheme='whatsapp'
             size={{ base: 'xs', sm: 'sm' }}
             title='Add'
             icon={
               <Icon as={AiOutlinePlus} boxSize={{ base: '12px', sm: '15px' }} />
             }
-            onClick={() => console.log('Add to Cart')}
+            onClick={() => handleAdd(product)}
           />
         </HStack>
       </Flex>
